@@ -27,8 +27,6 @@ module rv32i_core (
     reg [7:0]  pc;
     reg [31:0] ir;          // latched instruction
     reg [31:0] alu_result;
-    reg [31:0] load_result;
-    reg        branch_taken;
     reg [7:0]  next_pc;
 
     // ------------------------------------------------------------
