@@ -19,6 +19,11 @@ memory, 512 kB RAM, and a VGA card — none of which fits in a TT tile
 space with no video output. See "Roadmap" below for the planned path
 to real external memory.
 
+## Layout
+
+![Uploading Screenshot 2026-09-05 at 7.54.38 AM.png…]()
+
+
 ## Status
 
 - [x] Full RV32I base integer ISA (all loads/stores/branches/ALU ops;
