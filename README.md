@@ -21,7 +21,8 @@ to real external memory.
 
 ## Layout
 
-![Uploading Screenshot 2026-09-05 at 7.54.38 AM.png…]()
+<img width="672" height="290" alt="Screenshot 2026-09-05 at 7 54 38 AM" src="https://github.com/user-attachments/assets/27507c0d-4309-4449-8588-f96f205cec55" />
+
 
 
 ## Status
