@@ -5,8 +5,12 @@
 //                 becomes fixed logic at synthesis time. Safe to rely on
 //                 at power-up on real silicon since it is NOT flip-flop
 //                 state, it is a lookup built from your program bytes.
-//   0x80 - 0xEF : RAM   (112 bytes) -- flip-flops, undefined at power-on
+//   0x80 - 0xAF : RAM   (48 bytes) -- flip-flops, undefined at power-on
 //                 on real silicon, use for stack/scratch data only.
+//                 (Trimmed down from 112 bytes to reduce flip-flop count
+//                 and ease placement/routing congestion on smaller tiles.
+//                 0xB0 - 0xEF is now unmapped: reads return 0, writes are
+//                 dropped.)
 //   0xF0        : LED_OUT  (memory-mapped, write-only, drives uo_out)
 //   0xF4        : SW_IN    (memory-mapped, read-only, reflects ui_in)
 //
@@ -22,7 +26,8 @@
 `default_nettype none
 
 module mem #(
-    parameter ROM_BYTES = 128
+    parameter ROM_BYTES = 128,
+    parameter RAM_BYTES = 48
 ) (
     input  wire        clk,
     input  wire        rst_n,
@@ -89,17 +94,17 @@ module mem #(
     wire [31:0] rom_word = {rom_byte(addr+3), rom_byte(addr+2), rom_byte(addr+1), rom_byte(addr)};
 
     // ---------------------------------------------------------------
-    // RAM: 112 bytes, flip-flop backed
+    // RAM: RAM_BYTES bytes (default 48), flip-flop backed
     // ---------------------------------------------------------------
-    reg [7:0] ram [0:111];
+    reg [7:0] ram [0:RAM_BYTES-1];
     integer i;
 
     // synthesis translate_off
-    initial for (i = 0; i < 112; i = i + 1) ram[i] = 8'h00;
+    initial for (i = 0; i < RAM_BYTES; i = i + 1) ram[i] = 8'h00;
     // synthesis translate_on
 
     wire in_rom = (addr < ROM_BYTES);
-    wire in_ram = (addr >= 8'h80) && (addr < 8'hF0);
+    wire in_ram = (addr >= 8'h80) && (addr < (8'h80 + RAM_BYTES));
     wire [7:0] ram_addr = addr - 8'h80;
 
     // ---------------------------------------------------------------
@@ -147,3 +152,4 @@ module mem #(
     end
 
 endmodule
+
