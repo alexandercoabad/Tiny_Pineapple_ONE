@@ -6,22 +6,22 @@ Inspired by [Pineapple ONE](https://pineapple-one.github.io/), a 32-bit
 RISC-V CPU built entirely out of discrete 7400-series logic chips (no
 FPGA, no microcontroller). This project reimplements that "just basic
 logic" spirit as a minimal, from-scratch RV32I core in synthesizable
-Verilog, sized to fit a single Tiny Tapeout tile on the IHP `sg13g2`
+Verilog, sized to fit a 6x2 Tiny Tapeout tile on the IHP `sg13g2`
 shuttle.
 
 - [Read the project datasheet](docs/info.md) — how it works, how to test it, pinout
 - [Original Pineapple ONE project](https://pineapple-one.github.io/)
 
 **Scope note:** the original design has a 500 kHz clock, 512 kB program
-memory, 512 kB RAM, and a VGA card — none of which fits in a TT tile
-(~167×108 µm). This project keeps the RV32I instruction set and the
+memory, 512 kB RAM, and a VGA card — none of which fits in a TT 6x2 tile
+(~167×108 µm per tile). This project keeps the RV32I instruction set and the
 "no FPGA, just logic" philosophy, but starts from a 256-byte address
 space with no video output. See "Roadmap" below for the planned path
 to real external memory.
 
 ## Layout
 
-<img width="672" height="290" alt="Screenshot 2026-09-05 at 7 54 38 AM" src="https://github.com/user-attachments/assets/27507c0d-4309-4449-8588-f96f205cec55" />
+<img width="1320" height="337" alt="Screenshot 2026-09-05 at 5 14 50 PM" src="https://github.com/user-attachments/assets/9af953e1-6abe-4492-90d3-c37ecddb3c22" />
 
 
 
